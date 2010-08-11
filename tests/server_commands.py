@@ -28,6 +28,7 @@ class ServerCommandsTestCase(unittest.TestCase):
     def test_get_and_set(self):
         # get and set can't be tested independently of each other
         self.assertEquals(self.client.get('a'), None)
+        self.assertEquals(self.client.get('a', 'nothing'), 'nothing')
         byte_string = 'value'
         integer = 5
         unicode_string = unichr(3456) + u'abcd' + unichr(3421)

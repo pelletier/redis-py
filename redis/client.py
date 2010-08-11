@@ -542,11 +542,15 @@ class Redis(threading.local):
             when = int(time.mktime(when.timetuple()))
         return self.execute_command('EXPIREAT', name, when)
 
-    def get(self, name):
+    def get(self, name, default=None):
         """
         Return the value at key ``name``, or None of the key doesn't exist
         """
-        return self.execute_command('GET', name)
+        result = self.execute_command('GET', name)
+        if result == None:
+            return default
+        else:
+            return result
     __getitem__ = get
 
     def getset(self, name, value):
